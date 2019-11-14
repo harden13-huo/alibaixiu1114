@@ -56,3 +56,20 @@ $.ajax({
         $('#userBox').html(html)
     }
 });
+
+// 通过事件委托的形式为编辑按钮点击添加事件
+// 点击了子元素，会通过事件冒泡给父元素
+$('#userBox').on('click','.edit',function () {
+    let id = $(this).attr('data-id');
+    $.ajax({
+        type: "get",
+        // url: '/users/' + id, 
+        url: `/users/${id}`,  //es6 新语法
+        success: function (response) {
+            console.log(response)
+            // m模板拼接
+            // let html = template('')
+        }
+    });
+})
+
