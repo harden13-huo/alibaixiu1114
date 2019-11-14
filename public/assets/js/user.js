@@ -68,8 +68,27 @@ $('#userBox').on('click','.edit',function () {
         success: function (response) {
             console.log(response)
             // m模板拼接
-            // let html = template('')
+            let html = template('modifyTpl',response)
+            $('#modifyBox').html(html)
         }
     });
-})
+});
+
+// 修改后提交
+$('#modifyBox').on('submit','#modifyForm',function () {
+    // 获取修改用户表单内容
+    let modifyData = $(this).serialize();
+    // 获取修改的用户id
+    let id = $(this).attr('data-id');
+    $.ajax({
+        type: "put",
+        url: `/users/${id}`,
+        data: modifyData,
+        success: function (response) {
+           location.reload()
+        }
+    });
+    // 阻止默认提交
+    return false
+});
 
