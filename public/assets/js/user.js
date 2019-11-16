@@ -82,7 +82,7 @@ $('#modifyBox').on('submit','#modifyForm',function () {
     let id = $(this).attr('data-id');
     $.ajax({
         type: "put",
-        url: `/users/${id}`,
+        url: `/users/${id}`, 
         data: modifyData,
         success: function (response) {
            location.reload()
@@ -90,5 +90,22 @@ $('#modifyBox').on('submit','#modifyForm',function () {
     });
     // 阻止默认提交
     return false
+});
+
+// 根据id 点击删除按钮 删除对应的用户 事件委托
+$('#userBox').on('click','.delete',function () {
+    // console.log(id)
+    // 弹确认框
+    if(confirm('您确认删除此用户吗？')) {
+         // 获取用户的id
+        let id = $(this).attr('data-id')
+        $.ajax({
+            type: "delete",
+            url: `/users/${id}`,
+            success: function (response) {
+                location.reload()
+            }
+        });
+    }
 });
 
