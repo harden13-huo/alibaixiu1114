@@ -109,3 +109,65 @@ $('#userBox').on('click','.delete',function () {
     }
 });
 
+// 顶部全选框
+let selectAll = $('#selectAll')
+let deleteMany =  $('#deleteMany')
+selectAll.on('change',function () {
+    // 获取全选框当前的状态
+    let status = $(this).prop('checked')
+    // console.log(status)  true false
+    if (status) {
+        // 为真就显示#deleteMany
+        deleteMany.show()
+    } else {
+        deleteMany.hide()
+    };
+    // 获取到userBox里的全部复选框 使其和全选框的状态一致
+    $('#userBox').find('input').prop('checked',status);
+});
+
+// 当前用户前边的复选框状态改变时
+$('#userBox').on('change','.userStatus',function () {
+    // - 获取到所有用户 在所有用户中过滤出选中的用户
+    // - 判断选中用户的数量和所有用户的数量是否一致
+    // - 如果一致 就说明所有的用户都是选中的
+    // - 否则 就是有用户没有被选中
+    let inputs = $('#userBox').find('input');
+
+    if(inputs.length === inputs.filter(':checked').length) {
+        // 顶部全选就选中
+        selectAll.prop('checked',true)
+    }else{
+        // 顶部全选就不选中
+        selectAll.prop('checked',false)
+    };
+
+    // 批量删除的显示与隐藏
+    if (inputs.filter(':checked').length > 0) {
+        deleteMany.show()
+    } else {
+        deleteMany.hide()
+    };
+});
+//  批量删除
+deleteMany.on('click',function () {
+    // 获取所有被checked的复选框 
+    let ids = [];
+    // 获取所有的选中用户
+    let checkedUser = $('#userBox').find('input').filter(':checked');
+    // 循环复选框
+    checkedUser.each(function (index,element) {
+        
+        ids.push($(element).attr('data-id'));
+    });
+    // console.log(ids)
+    if(confirm('您确认要删除此用户吗？')){
+        $.ajax({
+            type: "delete",
+            url: '/users/' + ids.join('-'),
+            success: function () {
+                location.reload()
+            }
+        });
+    };
+})
