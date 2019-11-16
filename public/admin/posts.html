@@ -28,14 +28,15 @@
       <div class="page-action">
         <!-- show when multiple checked -->
         <a class="btn btn-danger btn-sm" href="javascript:;" style="display: none">批量删除</a>
-        <form class="form-inline">
-          <select name="" class="form-control input-sm">
-            <option value="">所有分类</option>
+        <form class="form-inline" id="filterForm">
+          <select name="category" class="form-control input-sm" id="categoryBox">
+             
+
           </select>
-          <select name="" class="form-control input-sm">
-            <option value="">所有状态</option>
-            <option value="">草稿</option>
-            <option value="">已发布</option>
+          <select name="state" class="form-control input-sm">
+            <option value="">选择状态</option>
+            <option value="0">草稿</option>
+            <option value="1">已发布</option>
           </select>
           <button class="btn btn-default btn-sm">筛选</button>
         </form>
@@ -130,6 +131,12 @@
     {{if page < pages}}
       <li><a href="javascript:;" onclick="changePage({{page+1}})">下一页</a></li>
     {{/if}}
+  </script>
+  <!-- 所有分类下拉模板 -->
+  <script type="text/html" id="categoryTpl">
+    {{each data}}
+    <option value="{{$value._id}}">{{$value.title}}</option>
+    {{/each}}
   </script>
   <script>NProgress.done()</script>
 </body>

@@ -29,4 +29,35 @@ function changePage(page) {
             $('#page').html(page);
         }
     });
-}
+};
+
+// 向服务器发送请求获取分类列表的数据
+$.ajax({
+    type: "get",
+    url: "/categories",
+    success: function (response) {
+        console.log(response)
+        let html = template('categoryTpl',{data: response})
+        $('#categoryBox').html(html)
+    }
+});
+
+// 当用户进行分类列表删选时
+$('#filterForm').on('submit',function () {
+    //获取数据
+    let formData = $(this).serialize()
+    $.ajax({
+        type: "get",
+        url: "/posts",
+        data: formData,
+        success: function (response) {
+            let html = template('postsTpl', response);
+            $('#postsBox').html(html);
+            let page = template('pageTpl', response);
+            $('#page').html(page);
+        }
+    });
+    // 阻止默认行为
+    return false
+
+})
