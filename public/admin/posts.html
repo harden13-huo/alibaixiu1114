@@ -11,7 +11,7 @@
 </head>
 <body>
   <script>NProgress.start()</script>
-
+  <!-- 页面主体 -->
   <div class="main">
     <nav class="navbar">
       <button class="btn btn-default navbar-btn fa fa-bars"></button>
@@ -30,7 +30,6 @@
         <a class="btn btn-danger btn-sm" href="javascript:;" style="display: none">批量删除</a>
         <form class="form-inline" id="filterForm">
           <select name="category" class="form-control input-sm" id="categoryBox">
-             
 
           </select>
           <select name="state" class="form-control input-sm">
@@ -42,6 +41,7 @@
         </form>
         <ul class="pagination pagination-sm pull-right" id="page">
           
+
         </ul>
       </div>
       <table class="table table-striped table-bordered table-hover">
@@ -57,6 +57,7 @@
         </thead>
         <tbody id="postsBox">
           
+
         </tbody>
       </table>
     </div>
@@ -99,6 +100,30 @@
     </ul>
   </div>
 
+  <!-- 11.17文章评论 模态框 -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="exampleModalLabel">发布评论</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="message-text" class="control-label">Message:</label>
+              <textarea class="form-control" id="message-text"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-primary addCom">发布</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="../assets/vendors/jquery/jquery.js"></script>
   <script src="../assets/vendors/bootstrap/js/bootstrap.js"></script>
   <script src="../assets/vendors/art-template/template-web.js"></script>
@@ -116,10 +141,12 @@
         <td class="text-center">
           <a href="post-add.html?id={{$value._id}}" class="btn btn-default btn-xs">编辑</a>
           <a href="javascript:;" class="btn btn-danger btn-xs delete" data-id="{{$value._id}}">删除</a>
+          <a href="javascript:;" id='myModal' class="btn btn-success btn-xs postCom" data-id="{{$value._id}}">发表评论</a>
         </td>
       </tr>
     {{/each}}
   </script>
+
   <!-- 文章分页模板 -->
   <script type="text/html" id="pageTpl">
     {{if page > 1}}
@@ -132,12 +159,15 @@
       <li><a href="javascript:;" onclick="changePage({{page+1}})">下一页</a></li>
     {{/if}}
   </script>
+
   <!-- 所有分类下拉模板 -->
   <script type="text/html" id="categoryTpl">
     {{each data}}
     <option value="{{$value._id}}">{{$value.title}}</option>
     {{/each}}
   </script>
+
+  <!-- 进度条 -->
   <script>NProgress.done()</script>
 </body>
 </html>

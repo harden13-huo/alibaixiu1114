@@ -15,3 +15,9 @@ $('#logout').on('click',function(){
         });
     };
 });
+
+// // 处理时间格式的
+function formateDate(date) {
+    date = new Date(date)
+    return date.getFullYear() + '-' + (date.getMonth()+ 1) + '-' + date.getDate()
+};
