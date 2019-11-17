@@ -59,5 +59,18 @@ $('#filterForm').on('submit',function () {
     });
     // 阻止默认行为
     return false
+});
 
+// 11.17删除文章 
+$('#postsBox').on('click','.delete',function () {
+    if (confirm('您真的要删除吗？')) {
+        let id = $(this).attr('data-id')
+        $.ajax({
+            type: "delete",
+            url: `/posts/${id}`,
+            success: function () {
+                location.reload()
+            }
+        });
+    }
 })
