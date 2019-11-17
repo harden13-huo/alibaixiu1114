@@ -21,3 +21,14 @@ function formateDate(date) {
     date = new Date(date)
     return date.getFullYear() + '-' + (date.getMonth()+ 1) + '-' + date.getDate()
 };
+
+// 显示用户的登录状态
+$.ajax({
+    type: "get",
+    url: `/users/${userId}`,
+    success: function (response) {
+        console.log(response)
+        $('.profile .avatar').attr('src',response.avatar)
+        $('.profile .name').html(response.nickName)
+    }
+});
