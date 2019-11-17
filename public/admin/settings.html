@@ -32,10 +32,11 @@
         <div class="form-group">
           <label for="site_logo" class="col-sm-2 control-label">网站图标</label>
           <div class="col-sm-6">
-            <input id="site_logo" name="site_logo" type="hidden">
+            <!-- 隐藏域 -->
+            <input id="hiddenLogo" name="site_logo" type="hidden" >
             <label class="form-image">
-              <input id="logo" type="file">
-              <img src="../assets/img/logo.png">
+              <input id="logo" type="file" >
+              <img src="../assets/img/logo.png" id="preview">
               <i class="mask fa fa-upload"></i>
             </label>
           </div>
@@ -117,6 +118,8 @@
 
   <script src="../assets/vendors/jquery/jquery.js"></script>
   <script src="../assets/vendors/bootstrap/js/bootstrap.js"></script>
+  <script src="../assets/js/settings.js"></script>
+
   <script>NProgress.done()</script>
 </body>
 </html>
