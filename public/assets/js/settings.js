@@ -25,3 +25,38 @@ $('#logo').on('change',function () {
 });
 
 
+// settingsForm表单提交时
+$('#settingsForm').on('submit',function () {
+    // 获取表单输入的内容
+    let formData = $(this).serialize()
+    $.ajax({
+        type: "post",
+        url: "/settings",
+        data: formData,
+        success: function () {
+            location.reload()
+        }
+    });
+    // 阻止默认行为
+    return false
+});
+//显示网站设置数据
+$.ajax({
+    type: "get",
+    url: "/settings",
+    success: function (response) {
+        console.log(response)
+        if (response) {
+            // 隐藏域的图片显示
+            $('#hiddenLogo').val(response.logo)
+            //显示图片logo
+            $('#preview').attr('src',response.logo)
+            // 将网站标题显示在页面中
+            $('#settingsName').val(response.title)
+            // 将是否开启评论功能显示在页面中
+            $('#comment_status').prop('checked',response.comment)
+            // 将评论是否经过人工审核显示在页面中
+            $('#comment_reviewed').prop('checked',response.review)
+        }
+    }
+});
