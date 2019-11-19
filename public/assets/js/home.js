@@ -2,7 +2,7 @@ $.ajax({
     type: "get",
     url: "/slides",
     success: function (response) {
-        console.log(response)
+        // console.log(response)
         let html = template('slidesTpl',{data: response})
         $('#slidesBox').html(html)
             //轮播图照片
