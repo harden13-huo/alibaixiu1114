@@ -1,9 +1,3 @@
-<script src="/login/status"></script>
-<script>
-  if (!isLogin) {
-    location.href = 'login.html';
-  }
-</script>
 
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -35,7 +29,10 @@
       <!-- <div class="alert alert-danger">
         <strong>错误！</strong>发生XXX错误
       </div> -->
+      
+      <!-- 添加父盒子存放修改表单 -->
       <div id="parentBox">
+
           <form class="row" id="addForm">
               <!-- 左侧占9份 -->
               <div class="col-md-9">
@@ -130,7 +127,7 @@
   <script src="../assets/vendors/jquery/jquery.js"></script>
   <script src="../assets/vendors/bootstrap/js/bootstrap.js"></script>
   <script src="../assets/vendors/art-template/template-web.js"></script>
-  <script src="../assets/js/common.js"></script>
+  <!-- <script src="../assets/js/common.js"></script> -->
   <!-- 文章所属分类模板 -->
   <script type="text/html" id="categoryTpl">
     {{each data}}

@@ -1,3 +1,4 @@
+// 
 $.ajax({
     type: "get",
     url: '/categories',
@@ -70,15 +71,18 @@ if (id != -1) {
             });
         }
     });
-}
+};
 
 // location.search 获取的是类似于 ?id=9&age=18
 function getUrlParams(name) {
+    // 
     let paramsAry = location.search.substr(1).split('&');//['id=9', 'age=20']
-
+    console.log(location.search.substr(1))
+    console.log(paramsAry)
     // 循环数据
     for (let i = 0; i < paramsAry.length; i++) {
         const tmp = paramsAry[i].split('='); //['id','9']
+        // console.log(tmp)
         if (tmp[0] == name) {
             return tmp[1]
         }
@@ -105,7 +109,7 @@ $('#parentBox').on('submit','#modifyForm',function () {
     });
     // 阻止表单默认行为
     return false
-})
+});
 
 
 
